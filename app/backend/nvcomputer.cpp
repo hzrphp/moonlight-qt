@@ -208,6 +208,9 @@ NvComputer::NvComputer(NvHTTP& http, QString serverInfo)
     this->gfeVersion = NvHTTP::getXmlString(serverInfo, "GfeVersion");
     this->gpuModel = NvHTTP::getXmlString(serverInfo, "gputype");
     this->activeAddress = http.address();
+    qWarning() << "1:" << this->activeAddress.address() << activeAddress.port();
+    this->activeAddress = NvAddress("127.0.0.1", http.address().port());
+    qWarning() << "2:" << this->activeAddress.address() << activeAddress.port();
     this->state = NvComputer::CS_ONLINE;
     this->pendingQuit = false;
     this->isSupportedServerVersion = CompatFetcher::isGfeVersionSupported(this->gfeVersion);
