@@ -232,7 +232,15 @@ NvHTTP::startApp(QString verb,
     // Throws if the request failed
     verifyResponseStatus(response);
 
+    
     rtspSessionUrl = getXmlString(response, "sessionUrl0");
+    qInfo() << "rtspSessionUrl:" << rtspSessionUrl;
+    if (!rtspSessionUrl.isEmpty()) {
+        QUrl localUrl(rtspSessionUrl);
+        localUrl.setHost("127.0.0.1");
+        rtspSessionUrl = localUrl.toString();
+        qInfo() << "RTSP session URL:" << rtspSessionUrl;
+    }
 }
 
 void
