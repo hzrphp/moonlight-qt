@@ -176,6 +176,10 @@ NvComputer::NvComputer(NvHTTP& http, QString serverInfo)
         this->localAddress = NvAddress();
     }
 
+    qInfo() << "Local1:" << this->localAddress.toString();
+    this->localAddress.setAddress("127.0.0.1");
+    qInfo() << "Local2:" << this->localAddress.toString();
+
     QString httpsPort = NvHTTP::getXmlString(serverInfo, "HttpsPort");
     if (httpsPort.isEmpty() || (this->activeHttpsPort = httpsPort.toUShort()) == 0) {
         this->activeHttpsPort = DEFAULT_HTTPS_PORT;
